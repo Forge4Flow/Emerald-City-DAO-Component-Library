@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FlowComponents
 
 public struct BlurCircle: View {
     var diameter: CGFloat
@@ -27,11 +28,6 @@ public struct BlurCircle: View {
 }
 
 public struct BackgroundView: View {
-    // These color variables will be defined by you
-    var primaryColor = Color("ea-primary")
-    var secondaryColor = Color("ea-secondary")
-    var tertiaryColor = Color("ea-tertiary")
-    
     public init() {}
 
     public var body: some View {
@@ -42,7 +38,7 @@ public struct BackgroundView: View {
                 opacity: 0.4,
                 xOffset: -30,
                 yOffset: 50,
-                color: primaryColor
+                color: flowManager.themeConfig.primaryColor
             )
 
             BlurCircle(
@@ -51,7 +47,7 @@ public struct BackgroundView: View {
                 opacity: 0.4,
                 xOffset: 150,
                 yOffset: 550,
-                color: tertiaryColor
+                color: flowManager.themeConfig.tertiaryColory
             )
         }
         .edgesIgnoringSafeArea(.all) // Extend to the edges of the screen
