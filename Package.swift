@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "ecDAO",
     platforms: [
-        .iOS(.v16),
+        .iOS(.v17),
     ],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
@@ -15,8 +15,8 @@ let package = Package(
             targets: ["ecDAO"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/Forge4Flow/FlowComponents.git", from: "0.1.0"),
-//        .package(name: "FlowComponents", path: "/Users/boiseitguru/Development/Forge4Flow/ecosystem_sdks/FlowComponents"),
+//        .package(url: "https://github.com/Forge4Flow/FlowComponents.git", from: "0.1.0"),
+        .package(name: "FlowComponents", path: "/Users/boiseitguru/Development/Forge4Flow/ecosystem_sdks/FlowComponents"),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.

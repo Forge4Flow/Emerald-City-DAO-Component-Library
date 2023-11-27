@@ -12,8 +12,6 @@ public struct BlurCircle: View {
     var diameter: CGFloat
     var blurRadius: CGFloat
     var opacity: Double
-    var xOffset: CGFloat
-    var yOffset: CGFloat
     var color: Color
 
     public var body: some View {
@@ -22,8 +20,6 @@ public struct BlurCircle: View {
             .frame(width: diameter, height: diameter)
             .blur(radius: blurRadius)
             .opacity(opacity)
-            .offset(x: xOffset, y: yOffset)
-            .position(x: diameter / 2, y: diameter / 2) // Center the circle on its position
     }
 }
 
@@ -31,29 +27,28 @@ public struct BackgroundView: View {
     public init() {}
 
     public var body: some View {
-        ZStack {
-            BlurCircle(
-                diameter: 300,
-                blurRadius: 100,
-                opacity: 0.4,
-                xOffset: -30,
-                yOffset: 50,
-                color: flowManager.themeConfig.primaryColor
-            )
+        GeometryReader { geometry in
+            ZStack {
+                BlurCircle(
+                    diameter: geometry.size.width * 0.75, // Responsive size
+                    blurRadius: 100,
+                    opacity: 0.4,
+                    color: flowManager.themeConfig.primaryColor
+                )
+                .position(x: geometry.size.width * 0.20, y: geometry.size.height * 0.20) // Responsive position
 
-            BlurCircle(
-                diameter: 300,
-                blurRadius: 100,
-                opacity: 0.4,
-                xOffset: 150,
-                yOffset: 550,
-                color: flowManager.themeConfig.tertiaryColory
-            )
+                BlurCircle(
+                    diameter: geometry.size.width * 0.75, // Responsive size
+                    blurRadius: 100,
+                    opacity: 0.4,
+                    color: flowManager.themeConfig.tertiaryColory
+                )
+                .position(x: geometry.size.width * 0.90, y: geometry.size.height * 0.90) // Responsive position
+            }
+            .edgesIgnoringSafeArea(.all) // Extend to the edges of the screen
         }
-        .edgesIgnoringSafeArea(.all) // Extend to the edges of the screen
     }
 }
-
 #Preview {
     BackgroundView()
 }
