@@ -46,6 +46,15 @@
       }
     },
     {
+      "identity" : "flowcomponents",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Forge4Flow/FlowComponents.git",
+      "state" : {
+        "revision" : "0dde014c7b2b5fd847834edae9d23667710b0919",
+        "version" : "0.2.2"
+      }
+    },
+    {
       "identity" : "gzipswift",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/1024jp/GzipSwift",
@@ -115,6 +124,15 @@
       "state" : {
         "revision" : "5596407d1cf61b953b8e658fa8636a471df3c509",
         "version" : "1.1.6"
+      }
+    },
+    {
+      "identity" : "swiftui-cached-async-image",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/lorenzofiamingo/swiftui-cached-async-image",
+      "state" : {
+        "revision" : "467a3d17479887943ab917a379e62bbaff60ac8a",
+        "version" : "2.1.1"
       }
     },
     {

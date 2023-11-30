@@ -14,9 +14,9 @@ public struct RouterView<Content: View>: View {
     @State private var showErrorView: Bool = false
     @Binding private var title: String
     @Binding private var description: String
-    private var mainView: Content
+    private var mainView: ()-> Content
 
-    public init(title: Binding<String>, desc: Binding<String>, mainView: Content) {
+    public init(title: Binding<String>, desc: Binding<String>, @ViewBuilder mainView: @escaping ()->Content) {
         self._title = title
         self._description = desc
         self.mainView = mainView
@@ -30,11 +30,12 @@ public struct RouterView<Content: View>: View {
                 if !loggedIn {
                     SignInView(title: title, description: description)
                 } else {
-                    mainView
+                    mainView()
                 }
             }
             .padding(.horizontal, 20)
         }
+        .responsiveApp()
 //        .sheet(isPresented: $showErrorView, onDismiss: { flowManager.txError = nil }, content: {
 //            ErrorView(error: flowManager.txError ?? "")
 //        })
