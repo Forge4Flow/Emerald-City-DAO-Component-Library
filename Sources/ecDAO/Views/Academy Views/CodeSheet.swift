@@ -65,7 +65,7 @@ public struct CodeSheet: View {
                 .padding(5)
                 
                 TabView(selection: $codeType) {
-                    CodeBlock(cadenceCode: swiftCode)
+                    CodeBlock(code: swiftCode.code, grammar: .swift)
                         .tag(CodeType.swift)
                     
                     CodeBlock(cadenceCode: cadenceCode)
