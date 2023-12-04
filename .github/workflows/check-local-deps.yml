@@ -1,0 +1,24 @@
+name: Check For Local Dependency Paths
+
+on:
+  pull_request:
+    paths:
+      - "Package.swift"
+
+jobs:
+  check-deps:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Check Dependency Paths
+        run: |
+          set -e
+
+          # Check for local paths in dependencies (excluding commented-out lines)
+          if grep -qE '^\s*//*\s*\.package\(path:' Package.swift; then
+            echo "Error: Local dependency paths found in Package.swift. Please update before merging."
+            exit 1
+          fi
