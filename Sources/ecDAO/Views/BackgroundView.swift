@@ -24,6 +24,8 @@ public struct BlurCircle: View {
 }
 
 public struct BackgroundView: View {
+    @Environment(FlowManager.self) private var flowManager
+    
     public init() {}
 
     public var body: some View {

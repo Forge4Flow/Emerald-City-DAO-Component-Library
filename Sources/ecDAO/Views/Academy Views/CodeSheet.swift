@@ -6,14 +6,16 @@
 //
 
 import SwiftUI
+import Observation
 import FlowComponents
 
-public class CodeViewConfig: ObservableObject {
-    @Published public var codeType: CodeType = .swift
-    @Published public var title: String
-    @Published public var description: String
-    @Published public var swiftCode: CadenceCode
-    @Published public var cadenceCode: CadenceCode
+@Observable
+public class CodeViewConfig {
+    public var codeType: CodeType = .swift
+    public var title: String
+    public var description: String
+    public var swiftCode: CadenceCode
+    public var cadenceCode: CadenceCode
     
     public init(title: String, description: String, swiftCode: CadenceCode, cadenceCode: CadenceCode) {
         self.title = title
@@ -31,18 +33,10 @@ public enum CodeType: String, CaseIterable, Identifiable {
 }
 
 public struct CodeSheet: View {
-    @Binding private var codeType: CodeType
-    @Binding private var title: String
-    @Binding private var description: String
-    @Binding private var swiftCode: CadenceCode
-    @Binding private var cadenceCode: CadenceCode
+    @Binding private var config: CodeViewConfig
     
-    public init(codeType: Binding<CodeType>, title: Binding<String>, description: Binding<String>, swiftCode: Binding<CadenceCode>, cadenceCode: Binding<CadenceCode>) {
-        self._codeType = codeType
-        self._title = title
-        self._description = description
-        self._swiftCode = swiftCode
-        self._cadenceCode = cadenceCode
+    public init(config: Binding<CodeViewConfig>) {
+        self._config = config
     }
     
     public var body: some View {
@@ -50,13 +44,13 @@ public struct CodeSheet: View {
             BackgroundView()
             
             VStack {
-                Text(title)
+                Text(config.title)
                     .font(.title)
                     .padding(.vertical, 10)
                 
-                Text(description)
+                Text(config.description)
                 
-                Picker("Select Code Type", selection: $codeType) {
+                Picker("Select Code Type", selection: $config.codeType) {
                     ForEach(CodeType.allCases) { type in
                         Text(type.rawValue).tag(type)
                     }
@@ -64,11 +58,11 @@ public struct CodeSheet: View {
                 .pickerStyle(.segmented)
                 .padding(5)
                 
-                TabView(selection: $codeType) {
-                    CodeBlock(code: swiftCode.code, grammar: .swift)
+                TabView(selection: $config.codeType) {
+                    CodeBlock(code: config.swiftCode.code, grammar: .swift)
                         .tag(CodeType.swift)
                     
-                    CodeBlock(cadenceCode: cadenceCode)
+                    CodeBlock(cadenceCode: config.cadenceCode)
                         .tag(CodeType.cadence)
                 }
                 .padding(.horizontal, 5)
