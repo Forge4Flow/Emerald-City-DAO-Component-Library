@@ -8,6 +8,10 @@
 import SwiftUI
 import FlowComponents
 
-public func ecDAOinit() {
-    flowManager.themeConfig = ThemeConfig(primaryColor: Color.eaPrimary, secondaryColor: Color.eaSecondary, tertiaryColory: Color.eaTertiary)
+public extension FlowApp {
+    func ecDAOinit() -> some View {
+        flowManager.themeConfig = ThemeConfig(primaryColor: Color.eaPrimary, secondaryColor: Color.eaSecondary, tertiaryColory: Color.eaTertiary)
+        
+        return self
+    }
 }

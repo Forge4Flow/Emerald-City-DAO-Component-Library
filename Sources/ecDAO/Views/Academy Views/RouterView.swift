@@ -10,8 +10,8 @@ import FCL
 import FlowComponents
 
 public struct RouterView<Content: View>: View {
-    @State private var loggedIn: Bool = false
-    @State private var showErrorView: Bool = false
+    @Environment(FlowManager.self) var flowManager
+    
     @Binding private var title: String
     @Binding private var description: String
     private var mainView: ()-> Content
@@ -27,23 +27,13 @@ public struct RouterView<Content: View>: View {
             BackgroundView()
             
             Group {
-                if !loggedIn {
+                if !flowManager.isAuthenticated{
                     SignInView(title: title, description: description)
                 } else {
                     mainView()
                 }
             }
             .padding(.horizontal, 20)
-        }
-        .responsiveApp()
-//        .sheet(isPresented: $showErrorView, onDismiss: { flowManager.txError = nil }, content: {
-//            ErrorView(error: flowManager.txError ?? "")
-//        })
-        .onReceive(fcl.$currentUser) { user in
-            self.loggedIn = (user != nil)
-        }
-        .onReceive(flowManager.$txError) { error in
-            self.showErrorView = (error != nil)
         }
     }
 }

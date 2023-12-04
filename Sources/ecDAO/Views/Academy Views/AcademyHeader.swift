@@ -10,7 +10,7 @@ import FCL
 import FlowComponents
 
 public struct AcademyHeader: View {
-    @EnvironmentObject var appProps: AppProperties
+    @Environment(AppProperties.self) private var appProps
     
     public init() {}
     
